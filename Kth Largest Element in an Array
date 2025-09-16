@@ -1,0 +1,20 @@
+import heapq
+
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        # Build a min-heap of the first k elements
+        heap = nums[:k]
+        heapq.heapify(heap)
+
+        # Iterate through the rest of the array
+        for num in nums[k:]:
+            if num > heap[0]:
+                heapq.heappushpop(heap, num)
+
+        # The root of the heap is the kth largest
+        return heap[0]
